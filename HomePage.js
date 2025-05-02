@@ -298,70 +298,69 @@ export default function HomePage() {
 }**/
 
 
+
 import { useState, useEffect } from "react";
 import EnsachagePage from "./EnsachagePage";
 import Irrigation from "./Irrigation";
 import Pollinisation from "./Pollinisation";
+import Fertilisation from "./Fertilisation"; // ✅ Import du module Fertilisation
 import Evaluation from "./Evaluation";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
+// ---------------------- Composant : Conseils ----------------------
 const Conseils = () => {
   const conseilsData = [
     {
       category: "Irrigation",
       tips: [
-        "🌞 Adaptez l'irrigation selon la météo pour économiser de l'eau.",
-        "💧 Arrosez tôt le matin ou tard le soir pour minimiser l'évaporation.",
-        "🚿 Utilisez des systèmes de goutte-à-goutte pour une irrigation ciblée."
+        "Adaptez l'irrigation selon la météo pour économiser de l'eau.",
+        "Arrosez tôt le matin ou tard le soir pour minimiser l'évaporation.",
+        "Utilisez des systèmes de goutte-à-goutte pour une irrigation ciblée.",
+        "En période de chaleur, augmentez l'irrigation en fonction des besoins des plantes.",
+        "Réduisez l'irrigation en période de pluie pour éviter les excès d'eau."
       ]
     },
     {
       category: "Santé des Plantes",
       tips: [
-        "🌿 Inspectez vos cultures régulièrement pour détecter maladies et parasites.",
-        "🕷️ Utilisez des solutions biologiques pour lutter contre les ravageurs.",
-        "🔍 Observez la couleur des feuilles : jaunissement = stress ou carence."
+        "Inspectez vos cultures régulièrement pour détecter maladies et parasites.",
+        "Utilisez des solutions biologiques contre les ravageurs.",
+        "Observez la couleur des feuilles : jaunissement = stress ou carence.",
+        "Appliquez des traitements préventifs contre les maladies fongiques en saison humide."
       ]
     },
     {
-      category: "Pratiques Durables",
+      category: "Ensachage",
       tips: [
-        "🌱 Utilisez des pratiques durables pour préserver la fertilité du sol.",
-        "♻️ Faites du compost avec les déchets organiques.",
-        "🚜 Alternez les cultures pour éviter l’épuisement du sol."
+        "Assurez-vous que la période d'ensachage coïncide avec la maturité des fruits.",
+        "En cas de forte humidité, assurez-vous que les sacs sont bien aérés pour éviter la moisissure.",
+        "Utilisez des sacs biodégradables pour une agriculture durable.",
+        "Evitez d'ensacher en période de pluie pour prévenir l'humidité excessive."
       ]
     },
     {
-      category: "Fertilisation",
+      category: "Pollinisation",
       tips: [
-        "📅 Fertilisez selon le calendrier agricole local.",
-        "🧪 Analysez votre sol pour adapter les engrais.",
-        "🥬 Privilégiez les engrais organiques pour une agriculture saine."
-      ]
-    },
-    {
-      category: "Protection des cultures",
-      tips: [
-        "🌬️ Utilisez des filets ou haies pour réduire les effets du vent.",
-        "☀️ Couvrez les cultures sensibles lors des pics de chaleur.",
-        "❄️ Protégez du gel en paillant le sol ou en couvrant les jeunes plants."
+        "Effectuez la pollinisation tôt le matin ou en fin de journée pour de meilleurs résultats.",
+        "Utilisez des abeilles ou autres pollinisateurs naturels pour une pollinisation efficace.",
+        "En l'absence de pollinisateurs naturels, vous pouvez envisager la pollinisation manuelle.",
+        "Les températures douces (15-25°C) sont idéales pour la pollinisation."
       ]
     }
   ];
 
   return (
-    <div className="my-5">
+    <section className="my-5">
       <h3 className="text-success mb-4">🧠 Conseils Agricoles</h3>
       <div className="row g-4">
         {conseilsData.map((section, index) => (
-          <div className="col-md-6 col-lg-4" key={index}>
-            <div className="card h-100 shadow-sm border-success">
+          <div className="col-md-4" key={index}>
+            <div className="card border-success h-100 shadow">
               <div className="card-header bg-success text-white fw-bold">
                 📌 {section.category}
               </div>
               <div className="card-body">
-                <ul className="list-unstyled mb-0">
+                <ul className="list-unstyled">
                   {section.tips.map((tip, i) => (
                     <li key={i} className="mb-2">✅ {tip}</li>
                   ))}
@@ -371,50 +370,55 @@ const Conseils = () => {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
+// ---------------------- Composant : Annonces ----------------------
 const Annonces = () => {
-  const [currentAnnouncement, setCurrentAnnouncement] = useState(0);
   const annonces = [
-    "🌟 La saison de pollinisation commence bientôt ! Préparez vos équipements.",
-    "🚨 Nouvelle fonction : météo locale en temps réel intégrée au calendrier.",
-    "📅 Webinaire : techniques de culture durable – Inscrivez-vous maintenant !"
+    "🌿 La saison de pollinisation commence bientôt !",
+    "🔔 Nouvelle fonction : météo locale intégrée.",
+    "📅 Webinaire : techniques agricoles durables."
   ];
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentAnnouncement(prev => (prev + 1) % annonces.length);
-    }, 10000);
+      setCurrentIndex((prev) => (prev + 1) % annonces.length);
+    }, 7000);
     return () => clearInterval(timer);
-  }, []);
+  }, [annonces.length]);
 
   return (
-    <div className="my-5">
-      <h3 className="text-primary">📢 Dernières Annonces</h3>
-      <div className="card shadow-sm mb-3">
+    <section className="my-5">
+      <h3 className="text-primary mb-3">📢 Dernières Annonces</h3>
+      <div className="card bg-light border-primary shadow-sm mb-3">
         <div className="card-body d-flex align-items-center">
           <i className="bi bi-megaphone-fill text-danger fs-4 me-3"></i>
-          <p className="mb-0">{annonces[currentAnnouncement]}</p>
+          <p className="mb-0">{annonces[currentIndex]}</p>
         </div>
       </div>
-      <button onClick={() => setCurrentAnnouncement((currentAnnouncement + 1) % annonces.length)}
-              className="btn btn-outline-primary">
+      <button
+        className="btn btn-outline-primary"
+        onClick={() => setCurrentIndex((currentIndex + 1) % annonces.length)}
+      >
         Suivante
       </button>
-    </div>
+    </section>
   );
 };
 
+// ---------------------- Composant Principal ----------------------
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState("accueil");
 
   const tabs = [
     { label: "Accueil", key: "accueil", icon: "bi-house" },
-    { label: "Ensachage", key: "ensachage", icon: "bi-box" },
-    { label: "Irrigation", key: "irrigation", icon: "bi-droplet-half" },
+    { label: "Ensachage", key: "ensachage", icon: "bi-box-seam" },
+    { label: "Irrigation", key: "irrigation", icon: "bi-droplet" },
     { label: "Pollinisation", key: "pollinisation", icon: "bi-flower1" },
+    { label: "Fertilisation", key: "fertilisation", icon: "bi-tree-fill" }, // ✅ Ajout Fertilisation
     { label: "Évaluation", key: "evaluation", icon: "bi-graph-up" },
   ];
 
@@ -423,10 +427,9 @@ export default function HomePage() {
       case "accueil":
         return (
           <div className="text-center p-4">
-            <h2 className="text-success">🌿 Bienvenue sur AgriPlateforme</h2>
-            
-            <Conseils />
+            <h2 className="text-success mb-4">🌾 Bienvenue sur AgriPlateforme Intelligente</h2>
             <Annonces />
+            <Conseils />
           </div>
         );
       case "ensachage":
@@ -435,6 +438,8 @@ export default function HomePage() {
         return <Irrigation />;
       case "pollinisation":
         return <Pollinisation />;
+      case "fertilisation":
+        return <Fertilisation />; // ✅ rendu de Fertilisation
       case "evaluation":
         return <Evaluation />;
       default:
@@ -446,17 +451,18 @@ export default function HomePage() {
     <div className="container-fluid p-0">
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-success px-3">
-        <a className="navbar-brand fw-bold fs-4" href="#">🌾 AgriPlateforme</a>
+        <a className="navbar-brand fw-bold fs-4" href="#">
+          🌿 AgriPlateforme
+        </a>
         <div className="collapse navbar-collapse justify-content-end">
           <ul className="navbar-nav">
             {tabs.map((tab) => (
               <li className="nav-item" key={tab.key}>
                 <button
-                  onClick={() => setActiveTab(tab.key)}
                   className={`btn btn-sm mx-1 ${activeTab === tab.key ? 'btn-light' : 'btn-outline-light'}`}
+                  onClick={() => setActiveTab(tab.key)}
                 >
-                  <i className={`bi ${tab.icon} me-1`}></i>
-                  {tab.label}
+                  <i className={`bi ${tab.icon} me-1`}></i> {tab.label}
                 </button>
               </li>
             ))}
@@ -468,20 +474,22 @@ export default function HomePage() {
       <main className="p-4 bg-light text-dark min-vh-100">{renderContent()}</main>
 
       {/* Footer */}
-      <footer className="bg-dark text-light text-center p-4">
+      <footer className="bg-dark text-light text-center p-4 mt-auto">
         <h5>📬 Contactez-nous</h5>
-        <p><strong>Email:</strong> <a href="mailto:contact@agriculture.com" className="text-info">contact@agriculture.com</a></p>
-        <p><strong>Téléphone:</strong> <a href="tel:+21675432140" className="text-info">+216 75000000</a></p>
-        <p><strong>Adresse:</strong> 123 Rue de l'Agriculture, Douz, Tunisie - 4200</p>
+        <p><strong>Email :</strong> <a href="mailto:contact@agriculture.com" className="text-info">contact@agriculture.com</a></p>
+        <p><strong>Téléphone :</strong> <a href="tel:+21675000000" className="text-info">+216 75000000</a></p>
+        <p><strong>Adresse :</strong> 123 Rue de l'Agriculture, Douz, Tunisie - 4200</p>
         <div className="d-flex justify-content-center gap-3 mt-3">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-info">Facebook</a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-info">Twitter</a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-info">Instagram</a>
+          <a href="https://facebook.com" className="text-info" target="_blank" rel="noreferrer">Facebook</a>
+          <a href="https://twitter.com" className="text-info" target="_blank" rel="noreferrer">Twitter</a>
+          <a href="https://instagram.com" className="text-info" target="_blank" rel="noreferrer">Instagram</a>
         </div>
       </footer>
     </div>
   );
 }
+
+
 
 
 

@@ -136,7 +136,7 @@ const EnsachagePage = () => {
         </tbody>
       </Table>
 
-      {/* Modal de saisie */}
+    
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{operation.id ? 'Modifier' : 'Ajouter'} une opération</Modal.Title>
@@ -199,3 +199,5 @@ const EnsachagePage = () => {
 };
 
 export default EnsachagePage;
+
+
