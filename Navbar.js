@@ -1,13 +1,12 @@
 
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 
 function AppNavbar() {
   return (
-    <Navbar bg="success" variant="dark" expand="lg" className="shadow-sm">
+    <Navbar bg="success" variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand href="/" className="fw-bold">🌿 Plateforme Agricole</Navbar.Brand>
+        <Navbar.Brand href="/">🌿 Plateforme Agricole</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-agri" />
         <Navbar.Collapse id="navbar-agri">
           <Nav className="me-auto">
@@ -29,6 +28,7 @@ function AppNavbar() {
 }
 
 export default AppNavbar;
+
 
 
 
